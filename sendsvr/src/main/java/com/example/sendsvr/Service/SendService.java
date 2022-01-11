@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.example.sendsvr.DTO.ChatMessage;
+import com.example.sendsvr.client.ReceiveClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,9 @@ public class SendService {
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
     private Map<String, Set<WebSocketSession>> rooms = new HashMap<>();
-    
+    @Autowired
+    private ReceiveClient receiveClient;
+
     public void handleAction(WebSocketSession session, ChatMessage message) throws Exception {
         if(rooms.containsKey(message.getRoomId())){
             rooms.get(message.getRoomId()).add(session);
@@ -31,9 +34,8 @@ public class SendService {
             rooms.put(message.getRoomId(), new HashSet<>());
             rooms.get(message.getRoomId()).add(session);
         }
-        session.sendMessage(new TextMessage(message.getMessage()));
-        // redisTemplate.opsForSet().add(message.getRoomId(), session);
-        // Set<Object> sessions = redisTemplate.opsForSet().members(message.getRoomId());
+        receiveClient.receiveMessage(message);
+        redisTemplate.delete(message.getRoomId());
         rooms.get(message.getRoomId()).parallelStream().forEach(sess -> sendMessage(sess, message));
     }
 
