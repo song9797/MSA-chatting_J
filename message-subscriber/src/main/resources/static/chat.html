@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<meta charset="utf-8"/>
+<title>Websocket</title>
+<script languate="javascript" type="text/javascript">
+
+    var websocket = new WebSocket("ws://localhost:50051/ws/chat");
+    var username = null;
+    var roomId = "roomId";
+    var output;
+    document.cookie = 'roomId=' + roomId + '; path=/';
+    function init(){
+        output = document.getElementById("output");
+        websocket.onopen = function(evt) {onOpen(evt);};
+        websocket.onclose = function(evt){onClose(evt);};
+        websocket.onmessage = function(evt) {onMessage(evt);};
+        websocket.onerror = function(evt) {onError(evt);};
+    }
+
+    function sendOnClick() {
+        username = document.getElementById("username").value;
+        text = document.getElementById("text").value;
+        printMessage(username + " : " + text);
+    }
+
+    function onOpen(evt){
+        printMessage("connected");
+    }
+
+    function onClose(evt) {
+        printMessage("disconnected");
+    }
+
+    function onMessage(evt) {
+        printMessage('<span style="color: blue;">' + evt.data + '</span>');
+    }
+    
+    function onError(evt){
+        printMessage('<span style="color: red;">error:</span> ' + evt.data);
+    }
+    function sendMessage(message){
+        printMessage("발신: " + message);
+        websocket.send(message);
+    }
+
+    function printMessage(message){
+        var pre = document.createElement("p");
+        pre.style.wordWrap = "break-word";
+        pre.innerHTML = message;
+        output.appendChild(pre);
+    }
+
+    window.addEventListener("load", init, false);
+</script>
+<body>
+    <h2>채팅 서비스</h2>
+    <div>
+        <label>이름: </label>
+        <input type="text" id="username">
+    </div>
+    <div>
+        <form>
+            <label>입력: </label>
+            <input type="text" id="text">
+            <button type="button" id="send" onclick="sendOnClick()">전송</button>
+        </form>
+    </div>
+    <div id="output">
+
+    </div>
+</body>
+</html>
