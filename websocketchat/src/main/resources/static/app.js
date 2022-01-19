@@ -19,7 +19,7 @@ $(document).ready(function(){
     function connect(){
         console.log("test");
         websocket = new WebSocket("ws://localhost:50050/ws/chat");
-
+        
         websocket.onmessage = onMessage;
         websocket.onopen = onOpen;
         websocket.onclose = onClose;

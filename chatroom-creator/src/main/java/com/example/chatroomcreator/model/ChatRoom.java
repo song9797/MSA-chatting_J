@@ -1,18 +1,23 @@
 package com.example.chatroomcreator.model;
 
-import java.util.Set;
-
-import org.springframework.data.annotation.Id;
-import org.springframework.web.socket.WebSocketSession;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
+@Entity
 public class ChatRoom {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
     private String name;
-    private Set<WebSocketSession> sessions;
+
+    public ChatRoom(String name){
+        this.name = name;
+    }
 }

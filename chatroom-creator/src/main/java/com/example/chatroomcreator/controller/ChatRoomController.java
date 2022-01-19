@@ -1,11 +1,11 @@
 package com.example.chatroomcreator.controller;
 
-import java.util.List;
-
+import com.example.chatroomcreator.DTO.ResponseDTO;
 import com.example.chatroomcreator.model.ChatRoom;
 import com.example.chatroomcreator.service.ChatRoomService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,12 +18,8 @@ public class ChatRoomController {
     private ChatRoomService chatRoomService;
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ChatRoom createChatRoom(@RequestBody String name){
-        return chatRoomService.createChatRoom(name);
-    }
-
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public List<ChatRoom> findAllRooms(){
-        return chatRoomService.findAllRooms();
+    public ResponseEntity<?> createChatRoom(@RequestBody String name){
+        ChatRoom chatRoom = chatRoomService.createChatRoom(name);
+        return ResponseEntity.ok().body(new ResponseDTO(200, "chatroom created", chatRoom));
     }
 }

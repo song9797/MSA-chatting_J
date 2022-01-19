@@ -6,5 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RedisRepository extends CrudRepository<ChatRoom, String>{
+public interface ChatRoomRepository extends CrudRepository<ChatRoom,String> {
+    
 }
