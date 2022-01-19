@@ -12,7 +12,24 @@ spring:
     redis:
         host: localhost
         port: 6379
-
+    jpa:
+        database: "MYSQL"
+        show-sql: "true"
+        hibernate:
+            ddl-auto: none
+        properties:
+            hibernate:
+            ddl-auto: none
+    datasource:
+        platform:  "mysql"
+        url: jdbc:mysql://jinho-db.crrywx8kuivs.ap-northeast-2.rds.amazonaws.com:3306/hakbu
+        username: "admin"
+        password: "jinho123"
+        testWhileIdle: "true"
+        validationQuery: "SELECT 1"
+    database:
+        driverClassName: "org.mysql.Driver"
+        
 eureka:
     instance:
         preferIpAddress: true

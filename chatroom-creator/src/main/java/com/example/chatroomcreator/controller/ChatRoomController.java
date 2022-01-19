@@ -1,5 +1,6 @@
 package com.example.chatroomcreator.controller;
 
+import com.example.chatroomcreator.DTO.ChatRoomDTO;
 import com.example.chatroomcreator.DTO.ResponseDTO;
 import com.example.chatroomcreator.model.ChatRoom;
 import com.example.chatroomcreator.service.ChatRoomService;
@@ -18,8 +19,8 @@ public class ChatRoomController {
     private ChatRoomService chatRoomService;
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ResponseEntity<?> createChatRoom(@RequestBody String name){
-        ChatRoom chatRoom = chatRoomService.createChatRoom(name);
+    public ResponseEntity<?> createChatRoom(@RequestBody ChatRoomDTO chatRoomDTO){
+        ChatRoom chatRoom = chatRoomService.createChatRoom(chatRoomDTO);
         return ResponseEntity.ok().body(new ResponseDTO(200, "chatroom created", chatRoom));
     }
 }
