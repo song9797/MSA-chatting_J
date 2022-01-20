@@ -13,12 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service 
 @Transactional
 public class ChatRoomService {
+    private static final String SUBSCRIBER = "ws://localhost:50051/ws/chat";
     @Autowired
     private ChatRoomRepository roomRepository;
 
     public ChatRoom createChatRoom(ChatRoomDTO chatRoomDTO) {
         String id = UUID.randomUUID().toString();
-        ChatRoom chatRoom = roomRepository.save(new ChatRoom(id, chatRoomDTO.getName()));
+        ChatRoom chatRoom = roomRepository.save(new ChatRoom(id, chatRoomDTO.getName(), SUBSCRIBER));
         return chatRoom;
     }
 }

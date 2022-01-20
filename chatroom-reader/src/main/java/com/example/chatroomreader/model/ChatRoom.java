@@ -22,4 +22,5 @@ public class ChatRoom {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
     private String name;
+    private String subscirber;
 }
