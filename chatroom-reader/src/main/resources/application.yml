@@ -24,7 +24,7 @@ spring:
         platform:  "mysql"
         url: jdbc:mysql://jinho-db.crrywx8kuivs.ap-northeast-2.rds.amazonaws.com:3306/hakbu
         username: "admin"
-        password: "{encrypt}dd"
+        password: "jinho123"
         testWhileIdle: "true"
         validationQuery: "SELECT 1"
     database:

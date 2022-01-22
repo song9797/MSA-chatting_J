@@ -1,0 +1,60 @@
+server:
+    port: 8080
+
+spring:
+    application:
+        name: gatewayservice
+    profiles:
+        active:
+            default
+    main:
+        web-application-type: reactive
+    cloud:
+        gateway:
+            discovery:
+                locator:
+                    enabled: true
+            routes:
+                - id: chatroomcreator
+                  uri: lb://CHATROOMCREATOR
+                  predicates:
+                    - Path=/room/create/**
+                - id: chatroomreader
+                  uri: lb://CHATROOMREADER
+                  predicates:
+                    - Path=/room/read
+                - id: messagepublisher
+                  uri: lb://MESSAGEPUBLISHER
+                  predicates:
+                    - Path=/pub/**
+                - id: messagesubscriber
+                  uri: lb://MESSAGESUBSCRIBER
+                  predicates:
+                    - Path=/sub/**
+
+eureka:
+    instance:
+        preferIpAddress: true
+    client:
+        registerWithEureka: true
+        fetchRegistry: true
+        serviceUrl:
+            defaultZone: http://localhost:8761/eureka/
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include:
+                    - "*"
+    endpoint:
+        health:
+            show-detail: always
+            diskspace:
+                enabled: true
+        env:
+            show-details: always
+            enabled: true
+        endpoint:
+            gateway:
+                enabled: true
