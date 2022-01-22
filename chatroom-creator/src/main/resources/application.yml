@@ -1,34 +1,3 @@
-server:
-    port: 50052
-    
-spring:
-    application:
-        name: chatroomcreator
-    profiles:
-        active:
-            default
-    session:
-        storage-type: redis
-    redis:
-        host: localhost
-        port: 6379
-    jpa:
-        database: "MYSQL"
-        show-sql: "false"
-        hibernate:
-            ddl-auto: update
-        properties:
-            hibernate:
-            ddl-auto: "update"
-    datasource:
-        platform:  "mysql"
-        url: jdbc:mysql://jinho-db.crrywx8kuivs.ap-northeast-2.rds.amazonaws.com:3306/hakbu
-        username: "admin"
-        password: "jinho123"
-        testWhileIdle: "true"
-        validationQuery: "SELECT 1"
-    database:
-        driverClassName: "org.mysql.Driver"
 eureka:
     instance:
         preferIpAddress: true
@@ -38,3 +7,12 @@ eureka:
         serviceUrl:
             defaultZone: http://localhost:8761/eureka/
 
+management:
+    endpoint:
+        health:
+            show-details: always
+            diskspace:
+                enabled: true
+        env:
+            show-details: always
+            enabled: true
