@@ -31,7 +31,10 @@ spring:
                   uri: lb://MESSAGESUBSCRIBER
                   predicates:
                     - Path=/sub/**
-
+                - id: userkicker
+                  uri: lb://USERKICKER
+                  predicates:
+                  - Path=/kick/**
 eureka:
     instance:
         preferIpAddress: true

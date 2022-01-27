@@ -6,7 +6,16 @@
     var username = null;
     var roomId = "roomId";
     var output;
+    var userId = uuidv4();
+    document.cookie = 'userId=' + userId 
     document.cookie = 'roomId=' + roomId + '; path=/';
+
+    function uuidv4() {
+        return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+          (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+        );
+    }
+
     function init(){
         output = document.getElementById("output");
         websocket.onopen = function(evt) {onOpen(evt);};
@@ -26,7 +35,6 @@
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 var json = JSON.parse(xhr.responseText);
-                console.log(json.email + ", " + json.password);
             }
         };
         var data = JSON.stringify({"sender": username, "message": text});

@@ -37,10 +37,13 @@ public class ChatHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         sessions.add(session);
-        String roomId = session.getHandshakeHeaders().get("cookie").toString().split("=")[1];
-        roomId = roomId.substring(0, roomId.length()-1);
-        log.info("roomId: " + roomId);
-        subscriberService.connectRoom(roomId, session);
+        String cookie = session.getHandshakeHeaders().get("cookie").get(0);
+        log.info(cookie);
+        
+        String userId = cookie.split("; ")[0].split("=")[1];
+        String roomId = cookie.split("; ")[1].split("=")[1];
+        log.info("user: " + userId + " roomId: " + roomId); 
+        subscriberService.connectRoom(roomId, session, userId);
         log.info(session + " 클라이언트 접속");
     }
 
@@ -49,7 +52,7 @@ public class ChatHandler extends TextWebSocketHandler {
         log.info(session + " 클라이언트 접속 해지");
         String roomId = session.getHandshakeHeaders().get("cookie").toString().split("=")[1];
         roomId = roomId.substring(0, roomId.length()-1);
-        subscriberService.disconnectRoom(roomId, session);
+        // subscriberService.disconnectRoom(roomId, session);
         sessions.remove(session);
     }
 }

@@ -12,7 +12,6 @@ import lombok.Setter;
 public class MessageDTO {
     private String sender;
     private String message;
-
     @Override
     public String toString(){
         return this.sender + ": " + this.message;

@@ -1,4 +1,4 @@
-package com.example.messagesubscriber;
+package com.example.userkicker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,9 +6,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @EnableDiscoveryClient
 @SpringBootApplication
-public class MessageSubscriberApplication {
+public class UserKickerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MessageSubscriberApplication.class, args);
+		SpringApplication.run(UserKickerApplication.class, args);
 	}
+
 }

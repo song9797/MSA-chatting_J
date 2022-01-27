@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
 
+
+
 @Slf4j
 @RestController
 @RequestMapping(value = "/sub")
@@ -26,4 +28,11 @@ public class SubscribeController {
         subscriberService.sendMessage(roomId, messageDto);
         return ResponseEntity.ok().body(new ResponseDTO(200, "message is successfully sended"));
     }
+
+    @RequestMapping(value="/kick/{roomId}/{userId}", method=RequestMethod.POST)
+    public ResponseEntity<?> requestMethodName(@PathVariable String roomId, @PathVariable String userId) {
+        subscriberService.disconnectRoom(roomId, userId);
+        return ResponseEntity.ok(new ResponseDTO(200, userId + " is kicked"));
+    }
+    
 }
