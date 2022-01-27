@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RoomUserRepository extends CrudRepository<RoomUser, RoomUserID> {
-    void deleteByRoomIdAndRoomUserId(String roomId, String userId);
+    void deleteByRoomIdAndUserId(String roomId, String userId);
 }

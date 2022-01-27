@@ -17,6 +17,7 @@ public class KickService {
     private RoomUserRepository roomUserRepository;
 
     public void kickByRoomIdAndUserId(String roomId, String userId){
-        roomUserRepository.deleteByRoomIdAndRoomUserId(roomId, userId);
+        // RoomUserID roomUserId = new RoomUserID(roomId, userId);
+        roomUserRepository.deleteByRoomIdAndUserId(roomId, userId);
     }
 }

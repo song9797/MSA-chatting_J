@@ -1,2 +1,21 @@
 server:
     port: 50051
+
+spring:
+    jpa:
+        database: "MYSQL"
+        show-sql: "false"
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+            ddl-auto: "update"
+    datasource:
+        platform:  "mysql"
+        url: jdbc:mysql://jinho-db.crrywx8kuivs.ap-northeast-2.rds.amazonaws.com:3306/hakbu
+        username: "admin"
+        password: "{cipher}7fe6cf70a9e195b6b55c944eca7f10438d961711bf7cfe824c01326aec0a0c18"
+        testWhileIdle: "true"
+        validationQuery: "SELECT 1"
+    database:
+        driverClassName: "org.mysql.Driver"
