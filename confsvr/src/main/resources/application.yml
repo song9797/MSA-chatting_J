@@ -10,7 +10,7 @@ spring:
                 git:
                     default-label: main
                     uri: https://github.com/zzzinho/MSA-chatting
-                    searchPaths: config/chatroomcreator, config/chatroomreader, config/messagepublisher, config/messagesubscriber
+                    searchPaths: config/chatroomcreator, config/chatroomreader, config/messagepublisher, config/messagesubscriber, config/userkicker
                 encrypt.enabled: true
 
 eureka:
