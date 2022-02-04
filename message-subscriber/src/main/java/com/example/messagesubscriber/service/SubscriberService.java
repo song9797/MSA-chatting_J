@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -38,7 +37,12 @@ public class SubscriberService {
         if(!rooms.containsKey(roomId)){
             rooms.put(roomId, new HashMap<>());
         }
-        Set<WebSocketSession> sessions = rooms.get(roomId).values().stream().collect(Collectors.toCollection(HashSet::new));
+    
+        // Set<WebSocketSession> sessions = rooms.get(roomId).values().stream().collect(Collectors.toCollection(HashSet::new));
+        Set<WebSocketSession> sessions = new HashSet<>();
+        for(RoomUser user : users){
+            sessions.add(rooms.get(roomId).get(user.getUserId()));
+        }
         sessions.parallelStream().forEach(session -> sendMessage(session, messageDto));
     }
 
