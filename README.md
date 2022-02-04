@@ -6,3 +6,12 @@
 - BCE 패턴
 ## 채팅 전송/수신
 <center><img src="./img/IMG_613499163D86-1.jpeg" width="700" height="600"></center>
+
+## 사용 기술
+- spring-boot:2.6.3
+- spring-data-jpa
+- spring-security
+- spring-config
+- spring-netflix-eureka
+- spring-websocket
+- mysql
